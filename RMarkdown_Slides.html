@@ -145,13 +145,22 @@
 
 </article></slide><slide class=""><hgroup><h2>RColorBrewer</h2></hgroup><article  id="rcolorbrewer">
 
-<p>-An excellent supplement to increasing the number of colour palettes in R The colours are split into three group, sequential, diverging, and qualitative. - Sequential - Light colours for low data, dark for high data - Diverging - Light colours for mid-range data, low and high contrasting dark colours - Qualitative - Colours designed to give maximum visual difference between classes</p>
+<p>-An excellent supplement to increasing the number of colour palettes in R The colours are split into three group, sequential, diverging, and qualitative.</p>
+
+<ul>
+<li><p>Sequential - Light colours for low data, dark for high data</p></li>
+<li><p>Diverging - Light colours for mid-range data, low and high contrasting dark colours</p></li>
+<li><p>Qualitative - Colours designed to give maximum visual difference between classes</p></li>
+</ul>
 
 <p>The main function is brewer.pal, which you simply give the number of colours you want, and the name of the palette, which you can choose from running display.brewer.all()</p>
 
-</article></slide><slide class="segue dark nobackground level1"><hgroup class = 'auto-fadein'><h2>Heatmaply</h2></hgroup><article  id="heatmaply">
+</article></slide><slide class=""><hgroup><h2>Heatmaply</h2></hgroup><article  id="heatmaply">
 
-<p>-Interactiveness allows for the inspection of specific value by hovering the mouse over a cell, as well as zooming into a region of the heatmap by dragging a rectangle around the relevant area. -This work is based on the ggplot2 and plotly.js engine. It produces similar heatmaps as d3heatmap, with the advantage of speed (plotly.js is able to handle larger size matrix), and the ability to zoom from the dendrogram.</p>
+<ul>
+<li><p>Interactiveness allows for the inspection of specific value by hovering the mouse over a cell, as well as zooming into a region of the heatmap by dragging a rectangle around the relevant area.</p></li>
+<li><p>This work is based on the ggplot2 and plotly.js engine. It produces similar heatmaps as d3heatmap, with the advantage of speed (plotly.js is able to handle larger size matrix), and the ability to zoom from the dendrogram.</p></li>
+</ul>
 
 </article></slide><slide class=""><hgroup><h2>install packages</h2></hgroup><article  id="install-packages">
 
@@ -186,7 +195,9 @@ heatmap(mtcars, scale=&quot;column&quot;)</pre>
 
 </article></slide><slide class=""><hgroup><h2>clusterization notes</h2></hgroup><article  id="clusterization-notes">
 
-<p>You may be noticed that order of both rows and columns is different compare to the native mtcar matrix. This is because heatmap do a reordering using clusterisation: it calculates the distance between each pair of rows and columns and try to order them by similarity. Moreover, the corresponding dendrogram are provided beside the heatmap. We can avoid it and just visualize the raw matrix: use the Rowv and Colv arguments as follow.</p>
+<p>The order of both rows and columns is different compare to the native mtcar matrix because heatmaps do a reordering using clusterisation: it calculates the distance between each pair of rows and columns and tries to order them by similarity.</p>
+
+<p>Moreover, the corresponding dendrogram are provided beside the heatmap. We can avoid it and just visualize the raw matrix: use the Rowv and Colv arguments.</p>
 
 </article></slide><slide class=""><hgroup><h2>plot raw matrix without reordering, this automatically excludes the dendrogram</h2></hgroup><article  id="plot-raw-matrix-without-reordering-this-automatically-excludes-the-dendrogram">
 
@@ -209,11 +220,9 @@ heatmap(mtcars, scale =&quot;column&quot;, col=terrain.colors(256))</pre>
 display.brewer.all()
 heatmap(mtcars, scale = &quot;column&quot;, col=brewer.pal(8, &quot;BuGn&quot;))</pre>
 
-</article></slide><slide class=""><hgroup><h2>publication prep</h2></hgroup><article  id="publication-prep">
-
 </article></slide><slide class=""><hgroup><h2>add x and y labels</h2></hgroup><article  id="add-x-and-y-labels">
 
-<p><code>heatmap(mtcars, Colv = NA, Rowv = NA, scale = &quot;column&quot;, col=brewer.pal(8, &quot;BuGn&quot;), xlab = &quot;Variables&quot;, ylab = &quot;Cars&quot;, main = &quot;Mtcars Heatmap&quot;)</code></p>
+<pre >heatmap(mtcars, Colv = NA, Rowv = NA, scale = &quot;column&quot;, col=brewer.pal(8, &quot;BuGn&quot;), xlab = &quot;Variables&quot;, ylab = &quot;Cars&quot;, main = &quot;Mtcars Heatmap&quot;)</pre>
 
 <pre >##edit labrow labels, size, and margins</pre>
 
@@ -269,49 +278,45 @@ guide_col=brewer.pal(9, &quot;BuGn&quot;)[guide]</pre>
 
 </article></slide><slide class=""><hgroup><h2>NA Identification</h2></hgroup><article  id="na-identification">
 
-<pre >#identifying NA&#39;s using heatmaply_na()
-heatmaply_na(mtcars, k_col =3, k_row = 3, margins = c(55, 30))
-#testing it out on a dataset that actually has NA&#39;s
-heatmaply_na(airquality, k_col =3, k_row = 3, margins = c(55, 30))</pre>
+<pre >#identifying NA&#39;s using heatmaply_na()</pre>
 
-</article></slide><slide class=""><hgroup><h2>changing colours</h2></hgroup><article  id="changing-colours">
+<p>heatmaply_na(mtcars, k_col =3, k_row = 3, margins = c(55, 30))</p>
 
-<pre >display.brewer.all()
-BuGn &lt;- colorRampPalette(brewer.pal(9, &quot;BuGn&quot;))
+<pre >#testing it out on a dataset that actually has NA&#39;s</pre>
 
-heatmaply(mtcars, xlab = &quot;Features&quot;, ylab = &quot;Cars&quot;, 
-          main = &quot;Scaled Heatmap of mtcars with Heatmaply&quot;,
-          margins = c(60,100,40,20),
-          colors = BuGn,
-          scale = &quot;column&quot;)</pre>
+<p>heatmaply_na(airquality, k_col =3, k_row = 3, margins = c(55, 30))</p>
 
-</article></slide><slide class=""><hgroup><h2>saving it as well</h2></hgroup><article  id="saving-it-as-well">
+<pre >
 
-<pre >heatmaply(cor(mtcars), margins = c(40, 40),
-          k_col = 2, k_row = 2,
-          colors = BuGn,
-          limits = c(-1,1),
-          file = &quot;folder/heatmaply_plot.png&quot;,
-          browseURL(&quot;folder/heatmaply_plot.png&quot;))</pre>
+##changing colours </pre>
 
-</article></slide><slide class=""><hgroup><h2>saving the plot</h2></hgroup><article  id="saving-the-plot">
+<p>display.brewer.all() BuGn &lt;- colorRampPalette(brewer.pal(9, &quot;BuGn&quot;))</p>
 
-</article></slide><slide class="segue dark nobackground level1"><hgroup class = 'auto-fadein'><h2>interactive version</h2></hgroup><article  id="interactive-version">
+<p>heatmaply(mtcars, xlab = &quot;Features&quot;, ylab = &quot;Cars&quot;, main = &quot;Scaled Heatmap of mtcars with Heatmaply&quot;, margins = c(60,100,40,20), colors = BuGn, scale = &quot;column&quot;)</p>
 
-<pre >dir.create(&quot;heatmaps&quot;)
-heatmaply(mtcars, file = &quot;heatmaps/heatmaply_plot.html&quot;)
-browseURL(&quot;folder/heatmaply_plot.html&quot;)
+<pre >##saving it as well</pre>
 
-webshot::install_phantomjs()</pre>
+<p>heatmaply(cor(mtcars), margins = c(40, 40), k_col = 2, k_row = 2, colors = BuGn, limits = c(-1,1), file = &quot;folder/heatmaply_plot.png&quot;, browseURL(&quot;folder/heatmaply_plot.png&quot;))</p>
 
-</article></slide><slide class=""><hgroup><h2>static version</h2></hgroup><article  id="static-version">
+<pre >##saving the plot
 
-<pre >heatmaply(mtcars, file = &quot;heatmaps/heatmaply_plot.png&quot;)
-browseURL(&quot;heatmaps/heatmaply_plot.png&quot;)</pre>
+##interactive version</pre>
+
+<p>dir.create(&quot;heatmaps&quot;) heatmaply(mtcars, file = &quot;heatmaps/heatmaply_plot.html&quot;) browseURL(&quot;folder/heatmaply_plot.html&quot;)</p>
+
+<p>webshot::install_phantomjs()</p>
+
+<pre >##static version</pre>
+
+<p>heatmaply(mtcars, file = &quot;heatmaps/heatmaply_plot.png&quot;) browseURL(&quot;heatmaps/heatmaply_plot.png&quot;) ```</p>
 
 </article></slide><slide class=""><hgroup><h2>Resources used for this workshop</h2></hgroup><article  id="resources-used-for-this-workshop">
 
-<p><a href='https://www.r-graph-gallery.com/215-the-heatmap-function/' title=''>https://www.r-graph-gallery.com/215-the-heatmap-function/</a> <a href='https://www.r-bloggers.com/drawing-heatmaps-in-r/' title=''>https://www.r-bloggers.com/drawing-heatmaps-in-r/</a> <a href='https://www.biostars.org/p/205417/' title=''>https://www.biostars.org/p/205417/</a> <a href='https://cran.r-project.org/web/packages/heatmaply/vignettes/heatmaply.html' title=''>https://cran.r-project.org/web/packages/heatmaply/vignettes/heatmaply.html</a> <a href='https://www.r-bloggers.com/r-using-rcolorbrewer-to-colour-your-figures-in-r/' title=''>https://www.r-bloggers.com/r-using-rcolorbrewer-to-colour-your-figures-in-r/</a> ```</p></article></slide>
+<p><a href='https://www.r-graph-gallery.com/215-the-heatmap-function/' title=''>https://www.r-graph-gallery.com/215-the-heatmap-function/</a> <a href='https://www.r-bloggers.com/drawing-heatmaps-in-r/' title=''>https://www.r-bloggers.com/drawing-heatmaps-in-r/</a> <a href='https://www.biostars.org/p/205417/' title=''>https://www.biostars.org/p/205417/</a> <a href='https://cran.r-project.org/web/packages/heatmaply/vignettes/heatmaply.html' title=''>https://cran.r-project.org/web/packages/heatmaply/vignettes/heatmaply.html</a> <a href='https://www.r-bloggers.com/r-using-rcolorbrewer-to-colour-your-figures-in-r/' title=''>https://www.r-bloggers.com/r-using-rcolorbrewer-to-colour-your-figures-in-r/</a></p>
+
+</article></slide><slide class=""><hgroup><h2>RLadies is looking for speakers!</h2></hgroup><article  id="rladies-is-looking-for-speakers">
+
+<p>If you or someone you know is interested in giving a beginner&#39;s talk for our organization (downtown area, month of April in the evening), email me at <a href='mailto:lisanatashacao@gmail.com' title=''>lisanatashacao@gmail.com</a> :)</p></article></slide>
 
 
   <slide class="backdrop"></slide>

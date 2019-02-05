@@ -1,13 +1,18 @@
 ###------HEATMAPS IN R------
+
+#https://github.com/lisancao/Heatmaps_in_R
+
 #if you need a dataset 
 #install.packages("mtcars")
 #others
-#install.packages("heatmaply")
+install.packages("heatmaply")
+install.packages("RColorBrewer")
 
+#load libraries
 library("heatmaply")
-library("mtcars")
+#library("mtcars")
 library("RColorBrewer")
-
+        
 
 ##import in mtcars as matrix 
 mtcars <- as.matrix(mtcars)
